@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Calculator</title>
+
+    <!-- Added link to the jQuery Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+    <!-- Added link to the  style sheet -->
+    <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body background="assets/images/background image.jpg">
+
+
+    <div class="container">
+
+        <!-- header-->
+        <div class="row" "rowHeader">
+            <div class="col-lg-6" id="introHead">
+                <h1>Welcome to the Crystal Game</h1>
+                <h3>Get ready to play</h3>
+            </div>
+            <div class="col-lg-6" id="rulesHead">
+                <p>You will be given a random number at start of the game</p>
+                <p>There are 4 crystals below. By clicking on the a crystal you will add a specific amount of point to your
+                    total score
+                </p>
+                <p>You win by matching your score to the random number</p>
+                <p>The value of each crystal is hidden from you until you click on it</p>
+                <p>Each time the game starts, the game will change the value of each crystal</p>
+            </div>
+        </div>
+        <div class="row">
+
+            <!-- Crystals -->
+            <div class="col-lg-12">
+                <div class="crystal-body">
+                    <button id="crystal1" class="btn btn-primary number" value="0" style="margin-right:16px">
+                        <img src="assets/images/Blue crystal.jpg" height=100 width=100>
+                    </button>
+                    <button id="crystal2" class="btn btn-primary number" value="0" style="margin-right:16px">
+                        <img src="assets/images/crystal grid.jpg" height=100 width=100>
+                    </button>
+                    <button id="crystal3" class="btn btn-primary number" value="0" style="margin-right:16px">
+                        <img src="assets/images/purple crystal.jpg" height=100 width=100>
+                    </button>
+                    <button id="crystal4" class="btn btn-primary number" value="0" style="margin-right:16px">
+                        <img src="assets/images/multcolor crystal.jpg" height=100 width=100>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Caluclating the totals, wins and losses -->
+        <div class="row">
+            <div class="col-lg-6" id="compCount">
+                <div id="empty-div1"></div>
+            </div>
+            <div class="col-lg-6" id="totalSum">
+                <div>
+                    <h2>Your total is currently
+                        <span id="crystalTotalSum"></span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div id="empty-div2"></div>
+
+        <div id="empty-div3"></div>
+
+        <div id="empty-div4"></div>
+        
+        <div class="row">
+            <div class="col-lg-6" id="winCount">
+                <div>
+                    <h2>Your wins is currently
+                        <span id="totalWins"></span>
+                    </h2>
+                </div>
+            </div>
+            <div class="col-lg-6" id="loseCount">
+                <div>
+                    <h2>Your total lose is currently
+                        <span id="totalLose"></span>
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <script type="text/javascript">
+
+
+        //-- initializing -->
+        var computerGuess = Math.floor((Math.random() * 120) + 19);
+        var crystal1Guess = Math.floor((Math.random() * 12) + 1);
+        var crystal2Guess = Math.floor((Math.random() * 12) + 1);
+        var crystal3Guess = Math.floor((Math.random() * 12) + 1);
+        var crystal4Guess = Math.floor((Math.random() * 12) + 1);
+        var totalSum = 0;
+        computerGuess = parseInt(computerGuess);
+        var x = 0;
+        totalWins = 0;
+        totalLose = 0;
+
+
+
+        $("#crystal1").val(crystal1Guess);
+        $("#crystal2").val(crystal2Guess);
+        $("#crystal3").val(crystal3Guess);
+        $("#crystal4").val(crystal4Guess);
+
+
+        $("#empty-div1").html("<h3>The number you are chasing is : </h3>" + computerGuess);
+        $("#crystalTotalSum").html(totalSum);
+        $("#totalWins").html(totalWins);
+        $("#totalLose").html(totalLose);
+
+
+        //-- function to initialize -->
+        function initFunction() {
+            computerGuess = Math.floor((Math.random() * 120) + 19);
+            crystal1Guess = Math.floor((Math.random() * 12) + 1);
+            crystal2Guess = Math.floor((Math.random() * 12) + 1);
+            crystal3Guess = Math.floor((Math.random() * 12) + 1);
+            crystal4Guess = Math.floor((Math.random() * 12) + 1);
+            totalSum = 0;
+            computerGuess = parseInt(computerGuess);
+            x = 0;
+
+            $("#crystal1").val(crystal1Guess);
+            $("#crystal2").val(crystal2Guess);
+            $("#crystal3").val(crystal3Guess);
+            $("#crystal4").val(crystal4Guess);
+
+
+            $("#empty-div1").html("<h3>The number you are chasing is : </h3>" + computerGuess);
+            $("#crystalTotalSum").html(totalSum);
+            $("#totalWins").html(totalWins);
+            $("#totalLose").html(totalLose);
+
+        }
+
+
+        //-- function to check if user guess has increased or met the computer guess -->
+        function checkStatus(computerGuess, totalSum) {
+            if (computerGuess == totalSum) {
+           //--     $("#empty-div3").html("<h1>u got it! you won! </h1>");
+                initFunction();
+                totalWins = totalWins + 1
+                $("#totalWins").html(totalWins);
+            }
+            if (computerGuess < totalSum) {
+          //--      $("#empty-div4").html("<h1>u lost! </h1>");
+                initFunction();
+                totalSum = 0;
+                totalSum = parseInt(totalSum)
+                totalLose = totalLose + 1
+                $("#totalLose").html(totalLose);
+            }
+
+        }
+
+
+ 
+//--Action to be performed when first crystal is clicked
+
+$(document).ready(function() {
+    
+    $("#crystal1").click(function() {
+
+     
+     
+      var x=document.getElementById("crystal1").value;
+     
+      totalSum=parseInt(totalSum)+parseInt(x);
+      $("#crystalTotalSum").html(totalSum);
+     
+      checkStatus(computerGuess,totalSum);
+      
+    });
+  })
+
+//--Action to be performed when second crystal is clicked
+ 
+  $(document).ready(function() {
+    
+    $("#crystal2").click(function() {
+
+   
+     
+      var x=document.getElementById("crystal2").value;
+    
+      totalSum=parseInt(totalSum)+parseInt(x);
+    
+      $("#crystalTotalSum").html(totalSum);
+      checkStatus(computerGuess,totalSum);
+    });
+  })
+
+//--Action to be performed when third crystal is clicked
+
+  $(document).ready(function() {
+    // Here we use jQuery to select the header with "click-me" as its ID.
+    // Whenever it is clicked...
+    $("#crystal3").click(function() {
+
+      // ... we trigger an alert.
+    
+      var x=document.getElementById("crystal3").value;
+    
+      totalSum=parseInt(totalSum)+parseInt(x);
+     
+      $("#crystalTotalSum").html(totalSum);
+      checkStatus(computerGuess,totalSum);
+    });
+  })
+
+//--Action to be performed when fourth crystal is clicked
+
+  $(document).ready(function() {
+    // Here we use jQuery to select the header with "click-me" as its ID.
+    // Whenever it is clicked...
+    $("#crystal4").click(function() {
+
+      // ... we trigger an alert.
+      
+      var x=document.getElementById("crystal4").value;
+     
+      totalSum=parseInt(totalSum)+parseInt(x);
+      
+      $("#crystalTotalSum").html(totalSum);
+      checkStatus(computerGuess,totalSum);
+    });
+  });
+
+
+</script>
+
+</body>
+</html>

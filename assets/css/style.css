@@ -1,0 +1,49 @@
+.crystal-body input{ /* You Can Name it what you want*/
+    margin-right:16px;
+    }
+    .Container input:last-child{
+    margin-right:0px;
+    /*so the last one dont push the div thas giving the space only between the inputs*/
+    }
+
+
+ #introHead {
+    background-color: rgb(28, 65, 3);
+    height: 200px ;
+    color:white;
+}
+
+
+#rulesHead {
+    background-color: rgb(73, 15, 139);
+    height: 200px ;
+    color:white;
+}
+
+#compCount {
+    background-color: rgb(3, 35, 65);
+    height: 100px ;
+    color:white;
+}
+
+
+#totalSum {
+    background-color: rgba(120, 139, 15, 0.734);
+    height: 100px ;
+    color:white;
+}
+
+
+#winCount {
+    background-color: rgba(139, 15, 36, 0.734);
+    height: 100px ;
+    color:white;
+}
+
+
+#loseCount {
+    background-color: rgba(160, 100, 94, 0.734);
+    height: 100px ;
+    color:white;
+}
+
